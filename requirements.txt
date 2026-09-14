@@ -1,0 +1,7 @@
+spade
+pandas
+openpyxl
+colorama
+requests
+openai
+google-genai
