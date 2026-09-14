@@ -1,0 +1,5 @@
+spade
+pandas
+openpyxl
+colorama
+openai
