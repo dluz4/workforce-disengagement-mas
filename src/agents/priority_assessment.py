@@ -165,6 +165,82 @@ class PriorityAssessmentAgent(BaseSpecialistAgent):
     # LLM explanation
     # --------------------------------------------------------------
 
+    @staticmethod
+    def describe_delta(delta) -> str:
+        """
+        Convert a numerical temporal deviation into an explicit
+        semantic description before it is sent to the LLM.
+        """
+
+        delta = float(delta)
+
+        if delta > 0:
+            return (
+                f"{abs(delta):.0f} minutes later than "
+                "individual baseline"
+            )
+
+        if delta < 0:
+            return (
+                f"{abs(delta):.0f} minutes earlier than "
+                "individual baseline"
+            )
+
+        return "aligned with individual baseline"
+
+
+    def build_semantic_alert(
+        self,
+        payload: dict,
+        max_examples: int = 3,
+    ) -> str:
+        """
+        Convert the structured attendance alert into a semantic
+        representation before sending it to the LLM.
+
+        The numerical detection remains deterministic. The LLM
+        receives explicit earlier/later descriptions rather than
+        having to infer the meaning of signed deltas.
+        """
+
+        employee_id = str(payload["EmployeeID"])
+        anomalies = payload.get("anomalies", [])
+        anomalies_count = int(
+            payload.get("anomalies_count", len(anomalies))
+        )
+
+        formatted_examples = []
+
+        for anomaly in anomalies[:max_examples]:
+            formatted_examples.append(
+                {
+                    "Date": anomaly["Data"],
+                    "Clock-in": anomaly["Entrada"],
+                    "Clock-in deviation": self.describe_delta(
+                        anomaly["DeltaEntradaMin"]
+                    ),
+                    "Clock-out": anomaly["Saida"],
+                    "Clock-out deviation": self.describe_delta(
+                        anomaly["DeltaSaidaMin"]
+                    ),
+                }
+            )
+
+        return (
+            f"Employee {employee_id} presented {anomalies_count} "
+            "attendance observations exceeding the individual "
+            f">{self.config.variation_alert}-minute temporal "
+            "deviation threshold.\n"
+            "The deviations below are already interpreted relative "
+            "to the employee's individual baseline. Do not reverse "
+            "or reinterpret the direction of the deviations.\n"
+            f"Examples: {formatted_examples}"
+        )
+
+
+
+
+
     def build_llm_prompt(
         self,
         employee_id: str,
@@ -182,10 +258,14 @@ class PriorityAssessmentAgent(BaseSpecialistAgent):
             "- Describe the information as a behavioral signal "
             "requiring contextual validation.\n"
             "- Recommend human review and validation.\n"
-            "- If extra working hours are present, they may be "
-            "described as a potential workload or wellbeing signal, "
-            "not as a diagnosis.\n"
-            "- Be concise.\n\n"
+            "- Do not infer causes such as disengagement, workload, wellbeing, "
+            "performance, or health from attendance data alone.\n"
+            "- Preserve the stated direction of each temporal deviation "
+            "(earlier/later) exactly as provided.\n"
+            "- State that contextual factors such as schedule changes, "
+            "approved arrangements, operational requirements, or data-quality "
+            "issues should be considered during human review.\n"
+            "- Be concise.\n\n"    
             f"EmployeeID={employee_id}\n"
             f"ManagerialPosition={managerial_position}\n"
             f"Priority={priority_level}\n\n"
@@ -312,11 +392,15 @@ class PriorityAssessmentAgent(BaseSpecialistAgent):
                 position
             )
 
+            semantic_alert = agent.build_semantic_alert(
+                payload
+            )
+
             explanation = await agent.openai_enrich(
                 employee_id=employee_id,
                 managerial_position=position,
                 priority_level=priority,
-                raw_alert=msg.body,
+                raw_alert=semantic_alert,
             )
 
             if explanation is None:
@@ -451,6 +535,84 @@ class PriorityAssessmentAgent(BaseSpecialistAgent):
                             "priority": "HIGH",
                         },
                     )
+
+
+            # ------------------------------------------
+            # Report priority assignment to Outcome Tracking
+            # ------------------------------------------
+
+            event_msg = Message(
+                to=agent.jid_outcome
+            )
+
+            event_msg.set_metadata(
+                "performative",
+                "inform",
+            )
+
+            event_msg.set_metadata(
+                "type",
+                "case_event",
+            )
+
+            event_msg.set_metadata(
+                "emp_id",
+                employee_id,
+            )
+
+            event_msg.set_metadata(
+                "source",
+                "priority_assessment",
+            )
+
+            event_msg.set_metadata(
+                "event",
+                "PRIORITY_ASSIGNED",
+            )
+
+            event_msg.set_metadata(
+                "result_type",
+                "METRIC",
+            )
+
+            event_msg.body = json.dumps(
+                {
+                    "EmployeeID": employee_id,
+                    "priority": priority,
+                    "posgerencial": position,
+                    "source": "priority_assessment",
+                },
+                default=str,
+            )
+
+            allowed, reason = agent.is_allowed(
+                event_msg
+            )
+
+            if allowed:
+                await agent.send(
+                    event_msg
+                )
+
+                agent.msg_out_count += 1
+
+            else:
+                agent.record_inconsistency(
+                    topic="SOCIAL_LAW_BLOCK",
+                    description=reason,
+                    parties=frozenset(
+                        {
+                            str(agent.jid),
+                            str(event_msg.to),
+                        }
+                    ),
+                    context={
+                        "EmployeeID": employee_id,
+                        "priority": priority,
+                    },
+                )
+
+
 
             agent._audit(
                 "PRIORITY_ASSIGNED",

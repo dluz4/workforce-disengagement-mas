@@ -1,0 +1,159 @@
+﻿EmployeeID,ManagerialPosition,Priority,DetectedAnomalies,SystemPrompt,UserPrompt,TechnicalAlert,Model,Temperature,InputTokens,OutputTokens,TotalTokens,LatencySeconds,EstimatedCostUSD,GPTResponse
+E1002,Gerente,HIGH,22,You are an HR support agent that writes concise and fair messages.,"You are an HR support agent.
+Transform a technical attendance alert into a short, clear and fair explanation for an HR Partner.
+
+Rules:
+- Do not accuse the employee.
+- Do not diagnose disengagement or a health condition.
+- Describe the information as a behavioral signal requiring contextual validation.
+- Recommend human review and validation.
+- Do not infer causes such as disengagement, workload, wellbeing, performance, or health from attendance data alone.
+- Preserve the stated direction of each temporal deviation (earlier/later) exactly as provided.
+- State that contextual factors such as schedule changes, approved arrangements, operational requirements, or data-quality issues should be considered during human review.
+- Be concise.
+
+EmployeeID=E1002
+ManagerialPosition=Gerente
+Priority=HIGH
+
+TECHNICAL ALERT:
+Employee E1002 presented 22 attendance observations exceeding the individual >30-minute temporal deviation threshold.
+The deviations below are already interpreted relative to the employee's individual baseline. Do not reverse or reinterpret the direction of the deviations.
+Examples: [{'Date': '2025-02-21 00:00:00', 'Clock-in': '08:31:00', 'Clock-in deviation': '3 minutes later than individual baseline', 'Clock-out': '17:37:00', 'Clock-out deviation': '41 minutes later than individual baseline'}, {'Date': '2025-03-07 00:00:00', 'Clock-in': '09:05:00', 'Clock-in deviation': '37 minutes later than individual baseline', 'Clock-out': '16:57:00', 'Clock-out deviation': '1 minutes later than individual baseline'}, {'Date': '2025-03-12 00:00:00', 'Clock-in': '08:24:00', 'Clock-in deviation': '3 minutes earlier than individual baseline', 'Clock-out': '17:36:00', 'Clock-out deviation': '40 minutes later than individual baseline'}]
+
+Write the message for the HR Partner.","Employee E1002 presented 22 attendance observations exceeding the individual >30-minute temporal deviation threshold.
+The deviations below are already interpreted relative to the employee's individual baseline. Do not reverse or reinterpret the direction of the deviations.
+Examples: [{'Date': '2025-02-21 00:00:00', 'Clock-in': '08:31:00', 'Clock-in deviation': '3 minutes later than individual baseline', 'Clock-out': '17:37:00', 'Clock-out deviation': '41 minutes later than individual baseline'}, {'Date': '2025-03-07 00:00:00', 'Clock-in': '09:05:00', 'Clock-in deviation': '37 minutes later than individual baseline', 'Clock-out': '16:57:00', 'Clock-out deviation': '1 minutes later than individual baseline'}, {'Date': '2025-03-12 00:00:00', 'Clock-in': '08:24:00', 'Clock-in deviation': '3 minutes earlier than individual baseline', 'Clock-out': '17:36:00', 'Clock-out deviation': '40 minutes later than individual baseline'}]",gpt-4o-mini-2024-07-18,0.7,434,124,558,2.77,0.0001395,"Subject: Attendance Alert for Employee E1002
+
+Dear [HR Partner's Name],
+
+We have identified 22 attendance observations for Employee E1002 that exceed the individual >30-minute temporal deviation threshold. The deviations include instances of arriving later and leaving later than their established baseline.
+
+It is essential to approach this data with caution, as attendance patterns can be influenced by various contextual factors such as schedule changes, approved arrangements, operational requirements, or potential data-quality issues. 
+
+I recommend a thorough human review to validate these observations and understand the context behind the deviations.
+
+Best regards,  
+[Your Name]  
+HR Support Agent"
+E1012,Gerente,HIGH,22,You are an HR support agent that writes concise and fair messages.,"You are an HR support agent.
+Transform a technical attendance alert into a short, clear and fair explanation for an HR Partner.
+
+Rules:
+- Do not accuse the employee.
+- Do not diagnose disengagement or a health condition.
+- Describe the information as a behavioral signal requiring contextual validation.
+- Recommend human review and validation.
+- Do not infer causes such as disengagement, workload, wellbeing, performance, or health from attendance data alone.
+- Preserve the stated direction of each temporal deviation (earlier/later) exactly as provided.
+- State that contextual factors such as schedule changes, approved arrangements, operational requirements, or data-quality issues should be considered during human review.
+- Be concise.
+
+EmployeeID=E1012
+ManagerialPosition=Gerente
+Priority=HIGH
+
+TECHNICAL ALERT:
+Employee E1012 presented 22 attendance observations exceeding the individual >30-minute temporal deviation threshold.
+The deviations below are already interpreted relative to the employee's individual baseline. Do not reverse or reinterpret the direction of the deviations.
+Examples: [{'Date': '2025-03-03 00:00:00', 'Clock-in': '08:09:00', 'Clock-in deviation': '38 minutes earlier than individual baseline', 'Clock-out': '17:25:00', 'Clock-out deviation': 'aligned with individual baseline'}, {'Date': '2025-03-11 00:00:00', 'Clock-in': '08:51:00', 'Clock-in deviation': '3 minutes later than individual baseline', 'Clock-out': '16:38:00', 'Clock-out deviation': '47 minutes earlier than individual baseline'}, {'Date': '2025-03-12 00:00:00', 'Clock-in': '08:50:00', 'Clock-in deviation': '2 minutes later than individual baseline', 'Clock-out': '16:39:00', 'Clock-out deviation': '46 minutes earlier than individual baseline'}]
+
+Write the message for the HR Partner.","Employee E1012 presented 22 attendance observations exceeding the individual >30-minute temporal deviation threshold.
+The deviations below are already interpreted relative to the employee's individual baseline. Do not reverse or reinterpret the direction of the deviations.
+Examples: [{'Date': '2025-03-03 00:00:00', 'Clock-in': '08:09:00', 'Clock-in deviation': '38 minutes earlier than individual baseline', 'Clock-out': '17:25:00', 'Clock-out deviation': 'aligned with individual baseline'}, {'Date': '2025-03-11 00:00:00', 'Clock-in': '08:51:00', 'Clock-in deviation': '3 minutes later than individual baseline', 'Clock-out': '16:38:00', 'Clock-out deviation': '47 minutes earlier than individual baseline'}, {'Date': '2025-03-12 00:00:00', 'Clock-in': '08:50:00', 'Clock-in deviation': '2 minutes later than individual baseline', 'Clock-out': '16:39:00', 'Clock-out deviation': '46 minutes earlier than individual baseline'}]",gpt-4o-mini-2024-07-18,0.7,432,165,597,1.897,0.00016379999999999997,"Subject: Attendance Alert for Employee E1012
+
+Dear [HR Partner's Name],
+
+We have received a technical attendance alert regarding Employee E1012, a manager, who has shown 22 instances of attendance deviations exceeding the >30-minute threshold. 
+
+The specific deviations indicate that the employee clocked in 38 minutes earlier on March 3rd, and clocked in 3 minutes later, with subsequent clock-out times deviating by 47 minutes earlier on March 11th and 46 minutes earlier on March 12th, among others.
+
+These attendance patterns serve as behavioral signals and warrant contextual validation. Please consider factors such as schedule changes, approved arrangements, operational requirements, or potential data-quality issues during your review.
+
+Thank you for addressing this matter.
+
+Best regards,  
+[Your Name]  
+HR Support Agent"
+E1077,NaoGerente,NORMAL,30,You are an HR support agent that writes concise and fair messages.,"You are an HR support agent.
+Transform a technical attendance alert into a short, clear and fair explanation for an HR Partner.
+
+Rules:
+- Do not accuse the employee.
+- Do not diagnose disengagement or a health condition.
+- Describe the information as a behavioral signal requiring contextual validation.
+- Recommend human review and validation.
+- Do not infer causes such as disengagement, workload, wellbeing, performance, or health from attendance data alone.
+- Preserve the stated direction of each temporal deviation (earlier/later) exactly as provided.
+- State that contextual factors such as schedule changes, approved arrangements, operational requirements, or data-quality issues should be considered during human review.
+- Be concise.
+
+EmployeeID=E1077
+ManagerialPosition=NaoGerente
+Priority=NORMAL
+
+TECHNICAL ALERT:
+Employee E1077 presented 30 attendance observations exceeding the individual >30-minute temporal deviation threshold.
+The deviations below are already interpreted relative to the employee's individual baseline. Do not reverse or reinterpret the direction of the deviations.
+Examples: [{'Date': '2025-02-24 00:00:00', 'Clock-in': '08:44:00', 'Clock-in deviation': '7 minutes earlier than individual baseline', 'Clock-out': '17:01:00', 'Clock-out deviation': '44 minutes earlier than individual baseline'}, {'Date': '2025-03-10 00:00:00', 'Clock-in': '07:40:00', 'Clock-in deviation': '71 minutes earlier than individual baseline', 'Clock-out': '17:50:00', 'Clock-out deviation': '4 minutes later than individual baseline'}, {'Date': '2025-03-31 00:00:00', 'Clock-in': '08:08:00', 'Clock-in deviation': '43 minutes earlier than individual baseline', 'Clock-out': '18:01:00', 'Clock-out deviation': '15 minutes later than individual baseline'}]
+
+Write the message for the HR Partner.","Employee E1077 presented 30 attendance observations exceeding the individual >30-minute temporal deviation threshold.
+The deviations below are already interpreted relative to the employee's individual baseline. Do not reverse or reinterpret the direction of the deviations.
+Examples: [{'Date': '2025-02-24 00:00:00', 'Clock-in': '08:44:00', 'Clock-in deviation': '7 minutes earlier than individual baseline', 'Clock-out': '17:01:00', 'Clock-out deviation': '44 minutes earlier than individual baseline'}, {'Date': '2025-03-10 00:00:00', 'Clock-in': '07:40:00', 'Clock-in deviation': '71 minutes earlier than individual baseline', 'Clock-out': '17:50:00', 'Clock-out deviation': '4 minutes later than individual baseline'}, {'Date': '2025-03-31 00:00:00', 'Clock-in': '08:08:00', 'Clock-in deviation': '43 minutes earlier than individual baseline', 'Clock-out': '18:01:00', 'Clock-out deviation': '15 minutes later than individual baseline'}]",gpt-4o-mini-2024-07-18,0.7,435,206,641,2.09,0.00018885,"Subject: Attendance Alert for Employee E1077
+
+Dear [HR Partner's Name],
+
+I wanted to bring to your attention that Employee E1077 has recorded 30 attendance observations that exceed the individual >30-minute temporal deviation threshold. Here are some examples of the deviations noted:
+
+- On 2025-02-24, the employee clocked in 7 minutes earlier and clocked out 44 minutes earlier than their individual baseline.
+- On 2025-03-10, the clock-in was 71 minutes earlier, while clock-out was 4 minutes later than the baseline.
+- On 2025-03-31, clock-in was 43 minutes earlier and clock-out was 15 minutes later than the baseline.
+
+These observations serve as behavioral signals that may require contextual validation. Please consider potential factors such as schedule changes, approved arrangements, operational requirements, or data-quality issues during your review.
+
+Thank you for your attention to this matter.
+
+Best regards,  
+[Your Name]  
+[Your Position]"
+E1098,NaoGerente,NORMAL,29,You are an HR support agent that writes concise and fair messages.,"You are an HR support agent.
+Transform a technical attendance alert into a short, clear and fair explanation for an HR Partner.
+
+Rules:
+- Do not accuse the employee.
+- Do not diagnose disengagement or a health condition.
+- Describe the information as a behavioral signal requiring contextual validation.
+- Recommend human review and validation.
+- Do not infer causes such as disengagement, workload, wellbeing, performance, or health from attendance data alone.
+- Preserve the stated direction of each temporal deviation (earlier/later) exactly as provided.
+- State that contextual factors such as schedule changes, approved arrangements, operational requirements, or data-quality issues should be considered during human review.
+- Be concise.
+
+EmployeeID=E1098
+ManagerialPosition=NaoGerente
+Priority=NORMAL
+
+TECHNICAL ALERT:
+Employee E1098 presented 29 attendance observations exceeding the individual >30-minute temporal deviation threshold.
+The deviations below are already interpreted relative to the employee's individual baseline. Do not reverse or reinterpret the direction of the deviations.
+Examples: [{'Date': '2025-02-25 00:00:00', 'Clock-in': '07:58:00', 'Clock-in deviation': '43 minutes earlier than individual baseline', 'Clock-out': '17:34:00', 'Clock-out deviation': '6 minutes earlier than individual baseline'}, {'Date': '2025-02-26 00:00:00', 'Clock-in': '08:44:00', 'Clock-in deviation': '3 minutes later than individual baseline', 'Clock-out': '16:59:00', 'Clock-out deviation': '41 minutes earlier than individual baseline'}, {'Date': '2025-02-27 00:00:00', 'Clock-in': '08:37:00', 'Clock-in deviation': '4 minutes earlier than individual baseline', 'Clock-out': '18:17:00', 'Clock-out deviation': '36 minutes later than individual baseline'}]
+
+Write the message for the HR Partner.","Employee E1098 presented 29 attendance observations exceeding the individual >30-minute temporal deviation threshold.
+The deviations below are already interpreted relative to the employee's individual baseline. Do not reverse or reinterpret the direction of the deviations.
+Examples: [{'Date': '2025-02-25 00:00:00', 'Clock-in': '07:58:00', 'Clock-in deviation': '43 minutes earlier than individual baseline', 'Clock-out': '17:34:00', 'Clock-out deviation': '6 minutes earlier than individual baseline'}, {'Date': '2025-02-26 00:00:00', 'Clock-in': '08:44:00', 'Clock-in deviation': '3 minutes later than individual baseline', 'Clock-out': '16:59:00', 'Clock-out deviation': '41 minutes earlier than individual baseline'}, {'Date': '2025-02-27 00:00:00', 'Clock-in': '08:37:00', 'Clock-in deviation': '4 minutes earlier than individual baseline', 'Clock-out': '18:17:00', 'Clock-out deviation': '36 minutes later than individual baseline'}]",gpt-4o-mini-2024-07-18,0.7,435,168,603,1.663,0.00016605,"Subject: Attendance Alert for Employee E1098
+
+Dear [HR Partner's Name],
+
+We have received a technical alert regarding Employee E1098, indicating 29 attendance observations that exceed the individual threshold of 30 minutes for temporal deviations. The deviations are as follows:
+
+- Multiple instances of clock-ins occurring earlier than the baseline, with the largest deviation being 43 minutes.
+- Several clock-outs occurring earlier than the baseline, with the largest deviation being 41 minutes.
+- Some clock-ins also occurring later than the baseline, with deviations up to 3 minutes.
+
+These observations require contextual validation to determine any underlying factors. Please consider possible influences such as schedule changes, approved arrangements, operational requirements, or data-quality issues during your review.
+
+Thank you for your attention to this matter.
+
+Best regards,  
+[Your Name]  
+HR Support Agent"

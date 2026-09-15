@@ -120,7 +120,7 @@ def compute_baseline_and_anomalies(
     Compute an individual attendance baseline and detect deviations.
 
     Baseline:
-        median clock-in and clock-out time from the first
+        mean clock-in and clock-out time from the first
         `baseline_days` observations.
 
     Anomaly:
@@ -164,12 +164,12 @@ def compute_baseline_and_anomalies(
 
     baseline = {
         "entrada": {
-            "median": _median(clock_in_values),
+            "mean": sum(clock_in_values) / len(clock_in_values),
             "min": min(clock_in_values),
             "max": max(clock_in_values),
         },
         "saida": {
-            "median": _median(clock_out_values),
+            "mean": sum(clock_out_values) / len(clock_out_values),
             "min": min(clock_out_values),
             "max": max(clock_out_values),
         },
@@ -196,12 +196,12 @@ def compute_baseline_and_anomalies(
 
         delta_in = (
             clock_in
-            - baseline["entrada"]["median"]
+            - baseline["entrada"]["mean"]
         )
 
         delta_out = (
             clock_out
-            - baseline["saida"]["median"]
+            - baseline["saida"]["mean"]
         )
 
         if (

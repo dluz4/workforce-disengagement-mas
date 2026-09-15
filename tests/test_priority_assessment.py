@@ -111,3 +111,38 @@ def test_load_position_map(monkeypatch):
         "EMP001": "NaoGerente",
         "EMP002": "NaoGerente",
     }
+    
+def test_priority_event_is_compatible_with_outcome_tracking():
+    from src.agents.outcome_tracking import OutcomeTrackingAgent
+    agent = OutcomeTrackingAgent.__new__(OutcomeTrackingAgent)
+    agent._hist = {}
+    history = agent.process_case_event(
+        emp_id="EMP001",
+        event="PRIORITY_ASSIGNED",
+        payload={
+            "EmployeeID": "EMP001",
+            "priority": "HIGH",
+            "posgerencial": "Gerente",
+            "source": "priority_assessment",
+        },
+    )
+    assert history.last_priority == "HIGH"
+    assert history.last_posgerencial == "Gerente"
+    assert len(history.audit_events) == 1
+    assert history.audit_events[0]["event"] == "PRIORITY_ASSIGNED"
+
+def test_describe_delta_preserves_temporal_direction():
+    assert (
+        PriorityAssessmentAgent.describe_delta(-38)
+        == "38 minutes earlier than individual baseline"
+    )
+
+    assert (
+        PriorityAssessmentAgent.describe_delta(37)
+        == "37 minutes later than individual baseline"
+    )
+
+    assert (
+        PriorityAssessmentAgent.describe_delta(0)
+        == "aligned with individual baseline"
+    )

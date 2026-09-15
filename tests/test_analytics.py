@@ -42,8 +42,8 @@ def test_baseline_and_anomaly_detection():
     )
 
     assert baseline is not None
-    assert baseline["entrada"]["median"] == 480
-    assert baseline["saida"]["median"] == 1020
+    assert baseline["entrada"]["mean"] == 480
+    assert baseline["saida"]["mean"] == 1020
 
     assert len(anomalies) == 1
     assert anomalies[0]["DeltaEntradaMin"] == 60
